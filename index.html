@@ -16,7 +16,37 @@
 			<div class="content">
 				<h1><a href="#">FFviz Early Access</a></h1>
 				<p>We're excited to bring you the most actionable fantasy football insights every week. As a new venture, every subscription is a valuable vote of confidence in what we are building. Join us now, help shape our future, and elevate your game every step of the season. </p>
-				
+			</div>
+			<div class="image phone">
+				<div class="inner"><img src="images/screen.jpg" alt="" /></div>
+			</div>
+		</header>
+
+		<!-- Tally Form Embed Instead of Buttons -->
+		<div style="text-align: center; margin-top: 20px;">
+			<iframe data-tally-src="https://tally.so/embed/mRRE7K?alignLeft=1&hideTitle=1&dynamicHeight=1" loading="lazy" height="120" frameborder="0" marginheight="0" marginwidth="0" title="Subscription Form"></iframe>
+			<script>
+				var d=document, w="https://tally.so/widgets/embed.js", v=function() {
+					"undefined" != typeof Tally ? Tally.loadEmbeds() : d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e) { e.src = e.dataset.tallySrc });
+				};
+				if ("undefined" != typeof Tally) v();
+				else if (d.querySelector('script[src="' + w + '"]') == null) {
+					var s = d.createElement("script");
+					s.src = w; s.onload = v; s.onerror = v; d.body.appendChild(s);
+				}
+			</script>
+		</div>
+
+		<!-- Rest of your sections and content goes here -->
+		
+		<!-- New Section for Chart and Team Selector -->
+		<section id="chart-section" class="wrapper">
+			<div class="inner">
+				<header class="major">
+					<h2>Interactive Fantasy Football Insights</h2>
+					<p>Analyze red zone targets for your favorite players with this interactive chart.</p>
+				</header>
+
 				<!-- Team Selector and Chart Container -->
 				<div id="chart-container" style="text-align: center;">
 					<!-- Team Selector -->
@@ -159,10 +189,7 @@
 					});
 				</script>
 			</div>
-			<div class="image phone">
-				<div class="inner"><img src="images/screen.jpg" alt="" /></div>
-			</div>
-		</header>
+		</section>
 
 		<!-- Tally Form Embed Instead of Buttons -->
 		<div style="text-align: center; margin-top: 20px;">
