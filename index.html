@@ -17,8 +17,18 @@
 				<h1><a href="#">FFviz Early Access</a></h1>
 				<p>We're excited to bring you the most actionable fantasy football insights every week. As a new venture, every subscription is a valuable vote of confidence in what we are building. Join us now, help shape our future, and elevate your game every step of the season. </p>
 				
-				<!-- Embed Plotly Chart -->
-				<div id="chart" style="width: 100%; height: 600px;"></div>
+				<!-- Team Selector and Chart Container -->
+				<div id="chart-container" style="text-align: center;">
+					<!-- Team Selector -->
+					<label for="team-select">Choose a team:</label>
+					<select id="team-select" style="margin-bottom: 20px;">
+						<!-- Options will be populated dynamically -->
+					</select>
+
+					<!-- Embed Plotly Chart -->
+					<div id="chart" style="width: 100%; height: 600px;"></div>
+				</div>
+
 				<script>
 					var data = [
 						{ player: 'CeeDee Lamb', targets: 31, team: 'DAL' },
@@ -60,42 +70,93 @@
 						'NYJ': '#125740'
 					};
 
-					var yLabels = data.map(item => `${item.player} (${item.team})`);
+					// Populate team selector
+					var teams = ['All Teams', ...new Set(data.map(item => item.team))];
+					var select = document.getElementById("team-select");
+					teams.forEach(function(team) {
+						var option = document.createElement("option");
+						option.value = team;
+						option.text = team;
+						select.appendChild(option);
+					});
 
-					var trace = {
-						y: yLabels,
-						x: data.map(item => item.targets),
-						text: data.map(item => item.targets),
-						type: 'bar',
-						orientation: 'h',
-						marker: {
-							color: data.map(item => teamColors[item.team]),
-							line: { color: 'white', width: 2 }
-						},
-						texttemplate: '%{text}',
-						textposition: 'outside',
-						hoverinfo: 'text+x',
-						hovertext: data.map(item => `${item.player} (${item.team})<br>Targets: ${item.targets}`),
-					};
+					function plotChart(team) {
+						var filteredData = team === 'All Teams' ? data : data.filter(item => item.team === team);
+						filteredData.sort((a, b) => b.targets - a.targets);
 
-					var layout = {
-						title: {
-							text: 'Red Zone Targets',
-							font: { size: 24, family: 'Montserrat, sans-serif' }
-						},
-						margin: {
-							l: 200,
-							r: 30,
-							t: 50,
-							b: 50
-						},
-						yaxis: { autorange: 'reversed', tickfont: { size: 14, color: 'black' }, showgrid: false },
-						xaxis: { tickfont: { size: 14, color: 'darkgrey' }, showgrid: false, zeroline: false },
-						font: { family: 'Montserrat, sans-serif', color: '#333' },
-						autosize: true,
-					};
+						// Concatenate player and team names for y-axis
+						var yLabels = filteredData.map(item => `${item.player} (${item.team})`);
 
-					Plotly.newPlot('chart', [trace], layout, {responsive: true});
+						var trace = {
+							y: yLabels,  // Use concatenated labels for y-axis
+							x: filteredData.map(item => item.targets),
+							text: filteredData.map(item => item.targets),  // Display targets outside the bar
+							type: 'bar',
+							orientation: 'h',
+							marker: {
+								color: filteredData.map(item => teamColors[item.team]),
+								line: {
+									color: 'white',
+									width: 2
+								}
+							},
+							texttemplate: '%{text}',  // Show target numbers outside
+							textposition: 'outside',
+							hoverinfo: 'text+x',
+							hovertext: filteredData.map(item => `${item.player} (${item.team})<br>Targets: ${item.targets}`),
+						};
+
+						var layout = {
+							title: {
+								text: 'Red Zone Targets',
+								font: {
+									size: 24,
+									family: 'Montserrat, sans-serif'
+								},
+							},
+							margin: {
+								l: 200,  // Adjust left margin to fit player names
+								r: 30,  // Reduce right margin for smaller screens
+								t: 50,
+								b: 50
+							},
+							paper_bgcolor: '#f4f4f4',
+							plot_bgcolor: '#f4f4f4',
+							yaxis: {
+								title: '',
+								autorange: "reversed",
+								tickfont: {
+									size: 14,
+									color: 'black'
+								},
+								showgrid: false
+							},
+							xaxis: {
+								title: '',
+								tickfont: {
+									size: 14,
+									color: 'darkgrey'
+								},
+								showgrid: false,
+								zeroline: false
+							},
+							font: {
+								family: 'Montserrat, sans-serif',
+								color: '#333'
+							},
+							autosize: true,  // Make it responsive to screen size
+						};
+
+						Plotly.newPlot('chart', [trace], layout, {responsive: true});  // Ensure responsiveness
+					}
+
+					// Initial plot with all teams
+					plotChart('All Teams');
+
+					// Update chart when the team is selected
+					document.getElementById("team-select").addEventListener("change", function() {
+						plotChart(this.value);
+					});
 				</script>
 			</div>
 			<div class="image phone">
