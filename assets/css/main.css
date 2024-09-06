@@ -1785,11 +1785,11 @@ input, select, textarea {
 	section.special, article.special {
 		text-align: center;
 	}
-
+/*
 	header p {
 		margin-top: -1em;
 	}
-
+*/
 	@media screen and (max-width: 736px) {
 
 		header p {
