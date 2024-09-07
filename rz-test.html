@@ -22,7 +22,7 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Red Zone Target Leaders</span>
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">FFviz</span>
 								</a>
 
 							<!-- Nav -->
@@ -60,10 +60,10 @@
 					</div>
 				-->
 
-				<div id="main">
+<div id="main">
     <div class="inner">
         <h1>Generic Page</h1>
-        <div id="chart" class="image main" style="width:100%; height:600px;"></div>
+        <div id="chart" style="width:100%; height:600px;"></div>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
             var data = [
@@ -77,29 +77,86 @@
                 { player: 'Rashee Rice', targets: 22, team: 'KAN' },
                 { player: 'Ja\'Marr Chase', targets: 19, team: 'CIN' },
                 { player: 'Travis Kelce', targets: 19, team: 'KAN' },
-                { player: 'Michael Pittman', targets: 18, team: 'IND' }
+                { player: 'Michael Pittman', targets: 18, team: 'IND' },
+                { player: 'Romeo Doubs', targets: 18, team: 'GNB' },
+                { player: 'Cooper Kupp', targets: 18, team: 'LAR' },
+                { player: 'DeAndre Hopkins', targets: 17, team: 'TEN' },
+                { player: 'David Njoku', targets: 17, team: 'CLE' },
+                { player: 'Deebo Samuel', targets: 17, team: 'SFO' },
+                { player: 'Courtland Sutton', targets: 17, team: 'DEN' },
+                { player: 'Garrett Wilson', targets: 17, team: 'NYJ' }
             ];
 
-            var layout = {
-                title: 'NFL Red Zone Target Leaders',
-                xaxis: {title: 'Targets'},
-                yaxis: {autorange: 'reversed'},
-                height: 600
+            var teamColors = {
+                'DAL': '#003594',
+                'LVR': '#000000',
+                'JAX': '#006778',
+                'MIA': '#008E97',
+                'SEA': '#002244',
+                'DET': '#0076B6',
+                'KAN': '#E31837',
+                'CIN': '#FB4F14',
+                'IND': '#002C5F',
+                'GNB': '#203731',
+                'LAR': '#003594',
+                'TEN': '#0C2340',
+                'CLE': '#311D00',
+                'SFO': '#AA0000',
+                'DEN': '#FB4F14',
+                'NYJ': '#125740'
             };
 
-            var trace = {
-                x: data.map(item => item.targets),
-                y: data.map(item => `${item.player} (${item.team})`),
-                type: 'bar',
-                orientation: 'h',
-                marker: {color: 'blue'}  // Simplified color for demonstration
-            };
+            var teams = ['All Teams', ...new Set(data.map(item => item.team))];
 
-            Plotly.newPlot('chart', [trace], layout);
+            function plotChart(team) {
+                var filteredData = team === 'All Teams' ? data : data.filter(item => item.team === team);
+                filteredData.sort((a, b) => b.targets - a.targets);
+                var yLabels = filteredData.map(item => `${item.player} (${item.team})`);
+                var trace = {
+                    y: yLabels,
+                    x: filteredData.map(item => item.targets),
+                    type: 'bar',
+                    orientation: 'h',
+                    marker: {
+                        color: filteredData.map(item => teamColors[item.team]),
+                        line: {
+                            color: 'white',
+                            width: 2
+                        }
+                    },
+                    texttemplate: '%{text}',
+                    textposition: 'outside',
+                    hoverinfo: 'text+x',
+                    hovertext: filteredData.map(item => `${item.player} (${item.team})<br>Targets: ${item.targets}`),
+                };
+                var layout = {
+                    margin: {
+                        l: window.innerWidth < 600 ? 120 : 200,
+                        r: 30,
+                        t: 50,
+                        b: 50
+                    },
+                    paper_bgcolor: '#f4f4f4',
+                    plot_bgcolor: '#f4f4f4',
+                    yaxis: {
+                        autorange: "reversed"
+                    },
+                    autosize: true
+                };
+                Plotly.newPlot('chart', [trace], layout, {responsive: true});
+            }
+
+            plotChart('All Teams');
+
+            document.body.insertAdjacentHTML('afterbegin', `
+                <label for="team-select">Choose a team:</label>
+                <select id="team-select" onchange="plotChart(this.value)">
+                    ${teams.map(team => `<option value="${team}">${team}</option>`).join('')}
+                </select>
+            `);
         </script>
-        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus...</p>
+        <!-- More content here -->
     </div>
 </div>
 
