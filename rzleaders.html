@@ -122,13 +122,14 @@
                         }
                     },
                     text: filteredData.map(item => item.targets.toString()),
-                    textposition: 'auto',
-                    hoverinfo: 'text+x',
-                    hovertext: filteredData.map(item => `${item.player} (${item.team})<br>Targets: ${item.targets}`),
+                    textposition: 'outside',
+                    insidetextanchor: 'end',
+                    hoverinfo: 'none'
                 };
                 var layout = {
                     title: 'Red Zone Target Leaders',
                     autosize: true,
+                    margin: { l: 250, r: 30, t: 50, b: 50 },
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
                     yaxis: {
