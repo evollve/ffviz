@@ -59,7 +59,7 @@
 <div id="main">
     <div class="inner">
         <h1>Red Zone Target Leaders</h1>
-        <div id="team-selector-container"></div>
+        <div id="team-selector-container" style="margin-bottom: 20px;"></div>
         <div id="chart" style="width:100%; height:600px;"></div>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
@@ -118,29 +118,22 @@
                         color: filteredData.map(item => teamColors[item.team]),
                         line: {
                             color: 'white',
-                            width: 2
+                            width: 1
                         }
                     },
                     text: filteredData.map(item => item.targets.toString()),
-                    textposition: 'outside',
+                    textposition: 'auto',
                     hoverinfo: 'text+x',
                     hovertext: filteredData.map(item => `${item.player} (${item.team})<br>Targets: ${item.targets}`),
                 };
                 var layout = {
                     title: 'Red Zone Target Leaders',
-                    /*margin: {
-                        l: 100,  // Adjusted left margin to accommodate mobile screens
-                        r: 50,   // Increased right margin to prevent cut-off
-                        t: 50,
-                        b: 50
-                    },
+                    autosize: true,
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
-		    */
                     yaxis: {
                         autorange: "reversed"
-                    },
-                    autosize: true
+                    }
                 };
                 Plotly.newPlot('chart', [trace], layout, {responsive: true});
             }
