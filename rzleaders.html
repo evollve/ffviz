@@ -129,14 +129,14 @@
                 var layout = {
                     title: 'Red Zone Target Leaders',
                     autosize: true,
-                    margin: { l: 250, r: 30, t: 50, b: 50 },
+                    margin: { l: (window.innerWidth > 500 ? 250 : 100), r: 30, t: 50, b: 50 }, // Responsive left margin
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
                     yaxis: {
                         autorange: "reversed"
                     }
                 };
-                Plotly.newPlot('chart', [trace], layout, {responsive: true});
+                Plotly.newPlot('chart', [trace], layout, {displayModeBar: false, responsive: true});
             }
 
             plotChart('All Teams');
@@ -148,6 +148,11 @@
                 </select>
             `;
             document.getElementById('team-selector-container').innerHTML = teamSelector;
+
+            // Adjust margins upon window resize
+            window.onresize = function() {
+                plotChart(document.getElementById('team-select').value);
+            };
         </script>
         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus...</p>
         <!-- More content here -->
