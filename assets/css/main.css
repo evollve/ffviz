@@ -3175,6 +3175,10 @@ input, select, textarea {
 		background-color: #f6f6f6;
 	}
 
+	#footer h2 {
+	margin-bottom: 0;
+	}
+
 		#footer > .inner {
 			display: -moz-flex;
 			display: -webkit-flex;
