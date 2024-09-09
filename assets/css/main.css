@@ -2580,7 +2580,7 @@ input, select, textarea {
 	}	
 
 .tile h2 {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 		.tiles article {
