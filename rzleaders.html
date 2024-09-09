@@ -59,7 +59,7 @@
     <div class="inner">
         <h1>Red Zone Target Leaders</h1>
         <div id="team-selector-container" style="margin-bottom: 20px;"></div>
-        <div id="chart" style="width:100%; height:800px;"></div>
+        <div id="chart" style="width:100%; height:auto;"></div>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
             var data = [
@@ -83,10 +83,8 @@
                 'KAN': '#E31837'
             };
 
-            var teams = ['All Teams', ...new Set(data.map(item => item.team))];
-
-            function plotChart(team) {
-                var filteredData = team === 'All Teams' ? data : data.filter(item => item.team === team);
+            function plotChart() {
+                var filteredData = data;
                 filteredData.sort((a, b) => b.targets - a.targets);
                 var yLabels = filteredData.map(item => `${item.player} (${item.team})`);
                 var trace = {
@@ -109,8 +107,7 @@
                 var layout = {
                     title: 'Red Zone Target Leaders',
                     autosize: true,
-                    height: 800,
-                    margin: { l: 180, r: 50, t: 50, b: 50 },
+                    margin: { l: 140, r: 50, t: 50, b: 50 },
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
                     yaxis: {
@@ -118,21 +115,17 @@
                     }
                 };
                 var config = {
-                    displayModeBar: false, // Disable the mode bar
-                    staticPlot: true      // Disable all interactive functionality
+                    responsive: true,
+                    displayModeBar: false
                 };
                 Plotly.newPlot('chart', [trace], layout, config);
             }
 
-            plotChart('All Teams');
+            plotChart();
 
-            var teamSelector = `
-                <label for="team-select">Choose a team:</label>
-                <select id="team-select" onchange="plotChart(this.value)">
-                    ${teams.map(team => `<option value="${team}">${team}</option>`).join('')}
-                </select>
-            `;
-            document.getElementById('team-selector-container').innerHTML = teamSelector;
+            window.onresize = function() {
+                plotChart();
+            };
         </script>
         <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus...</p>
         <!-- More content here -->
