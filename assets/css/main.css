@@ -2738,16 +2738,16 @@ input, select, textarea {
 
 				body:not(.is-touch) .tiles article:hover > .image:before {
 					background-color: #333333;
-					opacity: 0.35;
+					opacity: 0.8;
 				}
 
 				body:not(.is-touch) .tiles article:hover > .image:after {
-					opacity: 0;
+					opacity: 0.8;
 				}
 
 			body:not(.is-touch) .tiles article:hover .content {
 				max-height: 15em;
-				opacity: 1;
+				opacity: 0.8;
 			}
 
 		* + .tiles {
