@@ -55,12 +55,11 @@
 						</div>
 					</div>
 				-->
-
 <div id="main">
     <div class="inner">
-        <h1>🎯 Red Zone Target Leaders</h1>
-        <div id="team-selector-container"></div>
-        <div id="chart" style="width:100%; height:600px;"></div>
+        <h1>Red Zone Target Leaders</h1>
+        <div id="team-selector-container" style="margin-bottom: 20px;"></div>
+        <div id="chart" style="width:100%; height:800px;"></div>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
             var data = [
@@ -71,17 +70,7 @@
                 { player: 'Jake Ferguson', targets: 23, team: 'DAL' },
                 { player: 'D.K. Metcalf', targets: 23, team: 'SEA' },
                 { player: 'Amon-Ra St. Brown', targets: 23, team: 'DET' },
-                { player: 'Rashee Rice', targets: 22, team: 'KAN' },
-                { player: 'Ja\'Marr Chase', targets: 19, team: 'CIN' },
-                { player: 'Travis Kelce', targets: 19, team: 'KAN' },
-                { player: 'Michael Pittman', targets: 18, team: 'IND' },
-                { player: 'Romeo Doubs', targets: 18, team: 'GNB' },
-                { player: 'Cooper Kupp', targets: 18, team: 'LAR' },
-                { player: 'DeAndre Hopkins', targets: 17, team: 'TEN' },
-                { player: 'David Njoku', targets: 17, team: 'CLE' },
-                { player: 'Deebo Samuel', targets: 17, team: 'SFO' },
-                { player: 'Courtland Sutton', targets: 17, team: 'DEN' },
-                { player: 'Garrett Wilson', targets: 17, team: 'NYJ' }
+                { player: 'Rashee Rice', targets: 22, team: 'KAN' }
             ];
 
             var teamColors = {
@@ -91,16 +80,7 @@
                 'MIA': '#008E97',
                 'SEA': '#002244',
                 'DET': '#0076B6',
-                'KAN': '#E31837',
-                'CIN': '#FB4F14',
-                'IND': '#002C5F',
-                'GNB': '#203731',
-                'LAR': '#003594',
-                'TEN': '#0C2340',
-                'CLE': '#311D00',
-                'SFO': '#AA0000',
-                'DEN': '#FB4F14',
-                'NYJ': '#125740'
+                'KAN': '#E31837'
             };
 
             var teams = ['All Teams', ...new Set(data.map(item => item.team))];
@@ -118,30 +98,30 @@
                         color: filteredData.map(item => teamColors[item.team]),
                         line: {
                             color: 'white',
-                            width: 2
+                            width: 1
                         }
                     },
                     text: filteredData.map(item => item.targets.toString()),
                     textposition: 'outside',
-                    hoverinfo: 'text+x',
-                    hovertext: filteredData.map(item => `${item.player} (${item.team})<br>Targets: ${item.targets}`),
+                    insidetextanchor: 'end',
+                    hoverinfo: 'none'
                 };
                 var layout = {
-                    title: 'Red Zone Targets',
-                    margin: {
-                        l: 100,  // Adjusted left margin to accommodate mobile screens
-                        r: 50,   // Increased right margin to prevent cut-off
-                        t: 50,
-                        b: 50
-                    },
+                    title: 'Red Zone Target Leaders',
+                    autosize: true,
+                    height: 800,
+                    margin: { l: 180, r: 50, t: 50, b: 50 },
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
                     yaxis: {
                         autorange: "reversed"
-                    },
-                    autosize: true
+                    }
                 };
-                Plotly.newPlot('chart', [trace], layout, {responsive: true});
+                var config = {
+                    displayModeBar: false, // Disable the mode bar
+                    staticPlot: true      // Disable all interactive functionality
+                };
+                Plotly.newPlot('chart', [trace], layout, config);
             }
 
             plotChart('All Teams');
@@ -158,6 +138,9 @@
         <!-- More content here -->
     </div>
 </div>
+
+
+
 
 
 				<!-- Footer -->
