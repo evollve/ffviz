@@ -109,15 +109,19 @@
                 var layout = {
                     title: 'Red Zone Target Leaders',
                     autosize: true,
-                    height: 800,  // Increased chart height to accommodate text
-                    margin: { l: 180, r: 50, t: 50, b: 50 },  // Increased right margin
+                    height: 800,
+                    margin: { l: 180, r: 50, t: 50, b: 50 },
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
                     yaxis: {
                         autorange: "reversed"
                     }
                 };
-                Plotly.newPlot('chart', [trace], layout, {displayModeBar: false, responsive: true});
+                var config = {
+                    displayModeBar: false, // Disable the mode bar
+                    staticPlot: true      // Disable all interactive functionality
+                };
+                Plotly.newPlot('chart', [trace], layout, config);
             }
 
             plotChart('All Teams');
