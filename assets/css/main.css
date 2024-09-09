@@ -2575,6 +2575,7 @@ input, select, textarea {
 		flex-wrap: wrap;
 		postiion: relative;
 		margin: -2.5em 0 0 -2.5em;
+		color: white;
 	}
 
 		.tiles article {
@@ -3205,6 +3206,7 @@ input, select, textarea {
 			#footer .copyright {
     text-align: center;    /* Center align text */
     list-style: none;      /* Remove bullet points */
+	color: #A0A0A0;			
 }
 
 			#footer > .inner .copyright {
