@@ -61,26 +61,63 @@
         <div id="chart" style="width:100%; height:800px;"></div>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
-            var data = [
-                { player: 'CeeDee Lamb', targets: 31, team: 'DAL' },
-                { player: 'Davante Adams', targets: 29, team: 'LVR' },
-                { player: 'Calvin Ridley', targets: 26, team: 'JAX' },
-                { player: 'Tyreek Hill', targets: 24, team: 'MIA' },
-                { player: 'Jake Ferguson', targets: 23, team: 'DAL' },
-                { player: 'D.K. Metcalf', targets: 23, team: 'SEA' },
-                { player: 'Amon-Ra St. Brown', targets: 23, team: 'DET' },
-                { player: 'Rashee Rice', targets: 22, team: 'KAN' }
-            ];
+var data = [
+    { player: 'Isaiah Likely', team: 'BAL', targets: 3 },
+    { player: 'Cooper Kupp', team: 'LAR', targets: 3 },
+    { player: 'Wan'Dale Robinson', team: 'NYG', targets: 3 },
+    { player: 'Mike Evans', team: 'TAM', targets: 3 },
+    { player: 'Stefon Diggs', team: 'HOU', targets: 3 },
+    { player: 'Josh Palmer', team: 'LAC', targets: 2 },
+    { player: 'Tyreek Hill', team: 'MIA', targets: 2 },
+    { player: 'Justice Hill', team: 'BAL', targets: 2 },
+    { player: 'K.J. Osborn', team: 'NWE', targets: 2 },
+    { player: 'Jerry Jeudy', team: 'CLE', targets: 2 },
+    { player: 'Diontae Johnson', team: 'CAR', targets: 2 },
+    { player: 'Zay Flowers', team: 'BAL', targets: 2 },
+    { player: 'Amon-Ra St. Brown', team: 'DET', targets: 2 },
+    { player: 'Romeo Doubs', team: 'GNB', targets: 2 },
+    { player: 'Courtland Sutton', team: 'DEN', targets: 2 },
+    { player: 'Kenneth Walker', team: 'SEA', targets: 2 },
+    { player: 'Christian Watson', team: 'GNB', targets: 2 },
+    { player: 'Amari Cooper', team: 'CLE', targets: 2 },
+    { player: 'De\'Von Achane', team: 'MIA', targets: 2 },
+    { player: 'Ladd McConkey', team: 'LAC', targets: 2 },
+    { player: 'Tucker Kraft', team: 'GNB', targets: 2 },
+    { player: 'Keenan Allen', team: 'CHI', targets: 2 },
+    { player: 'Jaleel McLaughlin', team: 'DEN', targets: 1 },
+    { player: 'David Moore', team: 'CAR', targets: 1 },
+    { player: 'Foster Moreau', team: 'NOR', targets: 1 },
+    { player: 'Chigoziem Okonkwo', team: 'TEN', targets: 1 },
+    { player: 'Luke McCaffrey', team: 'WAS', targets: 1 },
+    { player: 'Trey McBride', team: 'ARI', targets: 1 },
+    { player: 'Khalil Shakir', team: 'BUF', targets: 1 },
+    { player: 'Kyle Pitts', team: 'ATL', targets: 1 }
+];
 
-            var teamColors = {
-                'DAL': '#003594',
-                'LVR': '#000000',
-                'JAX': '#006778',
-                'MIA': '#008E97',
-                'SEA': '#002244',
-                'DET': '#0076B6',
-                'KAN': '#E31837'
-            };
+var teamColors = {
+    'BAL': '#241773',
+    'LAR': '#003594',
+    'NYG': '#0B2265',
+    'TAM': '#D50A0A',
+    'HOU': '#03202F',
+    'LAC': '#0080C6',
+    'MIA': '#008E97',
+    'NWE': '#002244',
+    'CLE': '#311D00',
+    'CAR': '#0085CA',
+    'DET': '#0076B6',
+    'GNB': '#203731',
+    'DEN': '#FB4F14',
+    'SEA': '#002244',
+    'CHI': '#0B162A',
+    'NOR': '#D3BC8D',
+    'TEN': '#0C2340',
+    'WAS': '#773141',
+    'ARI': '#97233F',
+    'BUF': '#00338D',
+    'ATL': '#A71930'
+};
+
 
             var teams = ['All Teams', ...new Set(data.map(item => item.team))];
 
