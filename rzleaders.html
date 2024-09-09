@@ -70,17 +70,7 @@
                 { player: 'Jake Ferguson', targets: 23, team: 'DAL' },
                 { player: 'D.K. Metcalf', targets: 23, team: 'SEA' },
                 { player: 'Amon-Ra St. Brown', targets: 23, team: 'DET' },
-                { player: 'Rashee Rice', targets: 22, team: 'KAN' },
-                { player: 'Ja\'Marr Chase', targets: 19, team: 'CIN' },
-                { player: 'Travis Kelce', targets: 19, team: 'KAN' },
-                { player: 'Michael Pittman', targets: 18, team: 'IND' },
-                { player: 'Romeo Doubs', targets: 18, team: 'GNB' },
-                { player: 'Cooper Kupp', targets: 18, team: 'LAR' },
-                { player: 'DeAndre Hopkins', targets: 17, team: 'TEN' },
-                { player: 'David Njoku', targets: 17, team: 'CLE' },
-                { player: 'Deebo Samuel', targets: 17, team: 'SFO' },
-                { player: 'Courtland Sutton', targets: 17, team: 'DEN' },
-                { player: 'Garrett Wilson', targets: 17, team: 'NYJ' }
+                { player: 'Rashee Rice', targets: 22, team: 'KAN' }
             ];
 
             var teamColors = {
@@ -90,16 +80,7 @@
                 'MIA': '#008E97',
                 'SEA': '#002244',
                 'DET': '#0076B6',
-                'KAN': '#E31837',
-                'CIN': '#FB4F14',
-                'IND': '#002C5F',
-                'GNB': '#203731',
-                'LAR': '#003594',
-                'TEN': '#0C2340',
-                'CLE': '#311D00',
-                'SFO': '#AA0000',
-                'DEN': '#FB4F14',
-                'NYJ': '#125740'
+                'KAN': '#E31837'
             };
 
             var teams = ['All Teams', ...new Set(data.map(item => item.team))];
@@ -129,7 +110,7 @@
                     title: 'Red Zone Target Leaders',
                     autosize: true,
                     height: 800,  // Increased chart height to accommodate text
-                    margin: { l: 180, r: 30, t: 50, b: 50 },  // Static margin to ensure visibility
+                    margin: { l: 180, r: 50, t: 50, b: 50 },  // Increased right margin
                     paper_bgcolor: '#f4f4f4',
                     plot_bgcolor: '#f4f4f4',
                     yaxis: {
@@ -153,6 +134,7 @@
         <!-- More content here -->
     </div>
 </div>
+
 
 
 
