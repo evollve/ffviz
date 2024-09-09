@@ -3166,9 +3166,6 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		display: flex;
-    		justify-content: center;
-		align-items: center;
 		padding: 5em 0;
 		background-color: #f6f6f6;
 	}
@@ -3186,12 +3183,13 @@ input, select, textarea {
 			-webkit-flex-direction: row;
 			-ms-flex-direction: row;
 			flex-direction: row;
+			width: 100%;
 		}
-
+/*
 			#footer > .inner > * > :last-child {
 				margin-bottom: 0;
 			}
-/*
+
 			#footer > .inner section:nth-child(1) {
 				width: calc(66% - 2.5em);
 				margin-right: 2.5em;
