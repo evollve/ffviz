@@ -2562,7 +2562,7 @@ input, select, textarea {
 		}
 
 /* Tiles */
-
+	
 	.tiles {
 		display: -moz-flex;
 		display: -webkit-flex;
@@ -2638,7 +2638,7 @@ input, select, textarea {
 					background-position: center;
 					background-repeat: no-repeat;
 					background-size: 100% 100%;
-					opacity: 0.25;
+					opacity: 0.5;
 					z-index: 2;
 				}
 
