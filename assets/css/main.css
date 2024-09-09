@@ -2563,7 +2563,10 @@ input, select, textarea {
 		}
 
 /* Tiles */
-	
+	.tile h2 {
+    color: #FFF;
+}
+
 	.tiles {
 		display: -moz-flex;
 		display: -webkit-flex;
