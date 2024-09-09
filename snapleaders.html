@@ -17,7 +17,7 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">FFviz</span>
+									<span class="symbol"><img src="images/ffviz-logo.png" alt="" /></span><span class="title">FFviz</span>
 								</a>
 
 							<!-- Nav -->
@@ -85,46 +85,54 @@
 
             var teams = ['All Teams', ...new Set(data.map(item => item.team))];
 
-            function plotChart(team) {
-                var filteredData = team === 'All Teams' ? data : data.filter(item => item.team === team);
-                filteredData.sort((a, b) => b.targets - a.targets);
-                var yLabels = filteredData.map(item => `${item.player} (${item.team})`);
-                var trace = {
-                    y: yLabels,
-                    x: filteredData.map(item => item.targets),
-                    type: 'bar',
-                    orientation: 'h',
-                    marker: {
-                        color: filteredData.map(item => teamColors[item.team]),
-                        line: {
-                            color: 'white',
-                            width: 1
-                        }
-                    },
-                    text: filteredData.map(item => item.targets.toString()),
-                    textposition: 'outside',
-                    insidetextanchor: 'end',
-                    hoverinfo: 'none'
-                };
-                var layout = {
-                    title: 'Red Zone Target Leaders',
-                    autosize: true,
-                    height: 800,
-                    margin: { l: 180, r: 50, t: 50, b: 50 },
-                    paper_bgcolor: '#f4f4f4',
-                    plot_bgcolor: '#f4f4f4',
-                    yaxis: {
-                        autorange: "reversed"
-                    }
-                };
-                var config = {
-                    displayModeBar: false, // Disable the mode bar
-                    staticPlot: true      // Disable all interactive functionality
-                };
-                Plotly.newPlot('chart', [trace], layout, config);
-            }
+function plotChart(team) {
+    var screenWidth = window.innerWidth;
+    var rightMargin = screenWidth < 768 ? 100 : 50; // Adjust right margin based on screen size
+    var textSize = screenWidth < 768 ? '10px' : '12px'; // Adjust text size based on screen size
+    var textPosition = screenWidth < 768 ? 'inside' : 'outside'; // Move text inside the bar for small screens
 
-            plotChart('All Teams');
+    var filteredData = team === 'All Teams' ? data : data.filter(item => item.team === team);
+    filteredData.sort((a, b) => b.targets - a.targets);
+    var yLabels = filteredData.map(item => `${item.player} (${item.team})`);
+    var trace = {
+        y: yLabels,
+        x: filteredData.map(item => item.targets),
+        type: 'bar',
+        orientation: 'h',
+        marker: {
+            color: filteredData.map(item => teamColors[item.team]),
+            line: {
+                color: 'white',
+                width: 1
+            }
+        },
+        text: filteredData.map(item => item.targets.toString()),
+        textposition: textPosition,
+        insidetextanchor: 'end',
+        insidetextfont: { size: textSize },
+        hoverinfo: 'none'
+    };
+    var layout = {
+        title: 'Red Zone Target Leaders',
+        autosize: true,
+        height: 800,
+        margin: { l: 180, r: rightMargin, t: 50, b: 50 },
+        paper_bgcolor: '#f4f4f4',
+        plot_bgcolor: '#f4f4f4',
+        yaxis: {
+            autorange: "reversed"
+        }
+    };
+    var config = {
+        displayModeBar: false, // Disable the mode bar
+        staticPlot: true      // Disable all interactive functionality
+    };
+    Plotly.newPlot('chart', [trace], layout, config);
+}
+
+plotChart('All Teams');
+window.onresize = function() { plotChart(document.getElementById('team-select').value); }; // Replot chart on window resize
+
 
             var teamSelector = `
                 <label for="team-select">Choose a team:</label>
@@ -134,7 +142,6 @@
             `;
             document.getElementById('team-selector-container').innerHTML = teamSelector;
         </script>
-        <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus...</p>
         <!-- More content here -->
     </div>
 </div>
