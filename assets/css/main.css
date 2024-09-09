@@ -3200,6 +3200,12 @@ input, select, textarea {
 				margin-left: 2.5em;
 			}
 */
+
+			#footer .copyright {
+    text-align: center;    /* Center align text */
+    list-style: none;      /* Remove bullet points */
+}
+
 			#footer > .inner .copyright {
 				width: 100%;
 				padding: 0;
