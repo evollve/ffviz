@@ -144,6 +144,7 @@ var teamColors = {
         },
         text: filteredData.map(item => item.targets.toString()),
         textposition: textPosition,
+	textangle: screenWidth < 768 ? 0 : 0, // Keep text horizontal on all screens
         insidetextanchor: 'end',
         insidetextfont: { size: textSize },
         hoverinfo: 'none'
